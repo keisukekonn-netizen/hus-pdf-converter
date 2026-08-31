@@ -28,6 +28,7 @@ def main() -> None:
     password_required = _access_password()
     font = find_japanese_font()
 
+    st.caption("北海道科学大学　研究推進社会実装センター")
     st.title("学振PDF読み取り変換Web")
     st.markdown(
         """
