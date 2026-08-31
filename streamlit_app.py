@@ -28,7 +28,33 @@ def main() -> None:
     password_required = _access_password()
     font = find_japanese_font()
 
-    st.caption("北海道科学大学　研究推進社会実装センター")
+    st.markdown(
+        """
+<style>
+/* 大学・センター名 */
+.hus-center-name {
+  color: #1565c0;
+  font-weight: 700;
+  font-size: 1.15rem;
+  margin: 0.25rem 0 0.5rem 0;
+  line-height: 1.4;
+}
+/* パスワード入力・アップロード欄を白背景から区別 */
+div[data-testid="stTextInput"] input {
+  background-color: #eef3f8 !important;
+  border: 1.5px solid #90a4ae !important;
+  border-radius: 0.4rem !important;
+}
+div[data-testid="stFileUploaderDropzone"] {
+  background-color: #eef3f8 !important;
+  border: 1.5px solid #90a4ae !important;
+  border-radius: 0.5rem !important;
+}
+</style>
+<p class="hus-center-name">北海道科学大学　研究推進社会実装センター</p>
+""",
+        unsafe_allow_html=True,
+    )
     st.title("学振PDF読み取り変換Web")
     st.markdown(
         """
