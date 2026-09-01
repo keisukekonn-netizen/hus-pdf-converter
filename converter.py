@@ -20,8 +20,8 @@ _FONT_CANDIDATES = [
     r"C:\Windows\Fonts\meiryo.ttc",
 ]
 
-# PDF points are 1/72 inch; 300 DPI is standard print-quality rasterization.
-RENDER_DPI = 300
+# PDF points are 1/72 inch; 216 DPI balances sharpness and file size.
+RENDER_DPI = 216
 
 
 def load_japanese_font() -> tuple[pymupdf.Font, str]:
