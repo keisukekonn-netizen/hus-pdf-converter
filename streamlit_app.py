@@ -104,6 +104,7 @@ div[data-testid="stFileUploaderDropzone"] {
 - 埋め込み文字数: **{stats['chars']}**
 - テキストありページ: **{stats['pages_with_text']}**
 - 使用フォント: `{stats['font']}`
+- 背景画像解像度: **{stats['render_dpi']} DPI**
 """
             )
             st.download_button(

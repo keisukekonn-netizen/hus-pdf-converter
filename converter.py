@@ -20,6 +20,9 @@ _FONT_CANDIDATES = [
     r"C:\Windows\Fonts\meiryo.ttc",
 ]
 
+# PDF points are 1/72 inch; 300 DPI is standard print-quality rasterization.
+RENDER_DPI = 300
+
 
 def load_japanese_font() -> tuple[pymupdf.Font, str]:
     """Return (Font, label). Prefer MuPDF built-in Japan font for correct Unicode."""
@@ -50,7 +53,7 @@ def convert_jsps_pdf(
     input_path: str | Path,
     output_path: str | Path | None = None,
     *,
-    render_scale: float = 2.0,
+    render_dpi: int = RENDER_DPI,
 ) -> tuple[Path, dict]:
     """
     Rebuild PDF as image background + invisible Unicode text layer.
@@ -72,14 +75,13 @@ def convert_jsps_pdf(
 
     total_chars = 0
     pages_with_text = 0
-    matrix = pymupdf.Matrix(render_scale, render_scale)
     page_count = src.page_count
 
     try:
         for page in src:
             new_page = dst.new_page(width=page.rect.width, height=page.rect.height)
 
-            pix = page.get_pixmap(matrix=matrix, alpha=False)
+            pix = page.get_pixmap(dpi=render_dpi, alpha=False)
             new_page.insert_image(new_page.rect, pixmap=pix)
             pix = None
 
@@ -123,6 +125,7 @@ def convert_jsps_pdf(
         "chars": total_chars,
         "pages_with_text": pages_with_text,
         "font": font_label,
+        "render_dpi": render_dpi,
         "output": str(output_path),
     }
     return output_path, stats
